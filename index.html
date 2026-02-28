@@ -1,347 +1,202 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rock9.com — Welcome Bonus</title>
-  <meta name="description" content="Rock9.com landing page" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rock9.com — 99% Welcome Bonus</title>
 
-  <style>
-    :root{
-      --bg:#360904;
-      --red:#841D09;
-      --orange:#D74A09;
-      --gold:#F9C220;
-      --gold2:#F8E7B7;
-      --muted:#87846F;
-      --card: rgba(255,255,255,.06);
-      --stroke: rgba(248,231,183,.20);
-    }
+<style>
+:root{
+  --bg:#360904;
+  --gold:#F9C220;
+  --gold2:#F8E7B7;
+  --orange:#D74A09;
+}
 
-    *{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;}
-    body{
-      margin:0; color:var(--gold2);
-      background:
-        radial-gradient(900px 500px at 20% 0%, rgba(215,74,9,.55), transparent 60%),
-        radial-gradient(900px 500px at 85% 25%, rgba(249,194,32,.35), transparent 55%),
-        radial-gradient(800px 500px at 50% 110%, rgba(249,194,32,.25), transparent 55%),
-        linear-gradient(180deg, #1a0403 0%, var(--bg) 35%, #120202 100%);
-      overflow-x:hidden;
-    }
+*{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+body{
+  margin:0;
+  color:var(--gold2);
+  background:
+    radial-gradient(900px 500px at 20% 0%, rgba(215,74,9,.5), transparent 60%),
+    radial-gradient(900px 500px at 85% 25%, rgba(249,194,32,.35), transparent 55%),
+    linear-gradient(180deg, #1a0403 0%, var(--bg) 40%, #120202 100%);
+  overflow-x:hidden;
+}
 
-    /* ===== COIN RAIN LAYER ===== */
-    .coin-rain{
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .coin{
-      position:absolute;
-      top:-80px;
-      width:26px;
-      height:26px;
-      border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, var(--gold2), var(--gold) 45%, var(--orange) 95%);
-      box-shadow: 0 0 12px rgba(249,194,32,.55);
-      animation: fall linear infinite;
-      opacity:.85;
-      filter: saturate(1.08);
-    }
-    .coin::after{
-      content:"";
-      position:absolute;
-      inset:5px;
-      border-radius:50%;
-      border: 2px solid rgba(0,0,0,.25);
-      opacity:.55;
-    }
-    @keyframes fall{
-      0%{ transform: translateY(0) rotate(0deg); }
-      100%{ transform: translateY(115vh) rotate(720deg); }
-    }
+/* ===== COIN RAIN ===== */
+.coin-rain{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+.coin{
+  position:absolute;
+  top:-80px;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, var(--gold2), var(--gold) 45%, var(--orange) 95%);
+  box-shadow:0 0 10px rgba(249,194,32,.6);
+  animation: fall linear infinite;
+}
+@keyframes fall{
+  0%{ transform: translateY(0) rotate(0deg); }
+  100%{ transform: translateY(115vh) rotate(720deg); }
+}
 
-    /* ===== CONTENT ===== */
-    .wrap{
-      max-width:980px;
-      margin:0 auto;
-      padding:26px 16px 100px;
-      position:relative;
-      z-index:2; /* above coin rain */
-    }
+/* ===== CONTENT ===== */
+.wrap{
+  max-width:900px;
+  margin:auto;
+  padding:30px 16px 120px;
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
 
-    .top{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:10px 12px;border:1px solid rgba(248,231,183,.15);
-      border-radius:16px;background:rgba(0,0,0,.18);
-      backdrop-filter: blur(6px);
-    }
-    .brand{
-      font-weight:900;letter-spacing:.6px;
-      background:linear-gradient(180deg,var(--gold2),var(--gold));
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-    }
-    .pill{
-      font-size:12px;color:rgba(248,231,183,.85);
-      padding:7px 10px;border-radius:999px;
-      border:1px solid rgba(248,231,183,.18);
-      background:rgba(132,29,9,.22);
-      white-space:nowrap;
-    }
+.brand{
+  font-size:20px;
+  font-weight:900;
+  background:linear-gradient(180deg,var(--gold2),var(--gold));
+  -webkit-background-clip:text;
+  color:transparent;
+  margin-bottom:20px;
+}
 
-    .hero{
-      margin-top:16px;
-      display:grid;grid-template-columns:1.15fr .85fr;gap:14px;
-      align-items:stretch;
-    }
-    .card{
-      border-radius:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(0,0,0,.10));
-      border:1px solid var(--stroke);
-      box-shadow: 0 18px 50px rgba(0,0,0,.45);
-      padding:18px;
-      position:relative;
-      overflow:hidden;
-    }
-    .card::after{
-      content:"";
-      position:absolute; inset:-2px;
-      background:radial-gradient(600px 220px at 35% -10%, rgba(249,194,32,.25), transparent 60%);
-      pointer-events:none;
-    }
+.card{
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(248,231,183,.25);
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+}
 
-    h1{
-      margin:0 0 10px;
-      font-size:38px; line-height:1.08;
-      text-transform:uppercase;
-      letter-spacing:.3px;
-    }
-    .sub{margin:0 0 16px;color:rgba(248,231,183,.82);font-size:15px}
+h1{
+  margin:0 0 15px;
+  font-size:34px;
+  text-transform:uppercase;
+}
 
-    .badgeRow{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 16px}
-    .badge{
-      font-size:13px;
-      color:rgba(248,231,183,.92);
-      border:1px solid rgba(248,231,183,.16);
-      background:rgba(0,0,0,.18);
-      padding:9px 10px;border-radius:14px;
-    }
-    .goldLine{
-      height:1px;margin:16px 0;
-      background:linear-gradient(90deg, transparent, rgba(249,194,32,.6), transparent);
-    }
+.bonus{
+  font-size:46px;
+  font-weight:900;
+  margin:10px 0;
+  background:linear-gradient(180deg,var(--gold2),var(--gold));
+  -webkit-background-clip:text;
+  color:transparent;
+}
 
-    .offerBox{
-      border-radius:18px;
-      border:1px solid rgba(249,194,32,.28);
-      background:linear-gradient(180deg, rgba(249,194,32,.10), rgba(132,29,9,.16));
-      padding:14px;
-    }
-    .offerTitle{
-      font-weight:900; letter-spacing:.5px;
-      color:var(--gold2);
-      margin:0 0 6px;
-      text-transform:uppercase;
-    }
-    .offerBig{
-      margin:0;
-      font-weight:1000;
-      font-size:42px;
-      background:linear-gradient(180deg, var(--gold2), var(--gold));
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-      text-shadow:0 10px 30px rgba(249,194,32,.18);
-    }
-    .note{margin:8px 0 0;color:rgba(248,231,183,.78);font-size:13px}
+.sub{
+  color:rgba(248,231,183,.85);
+  margin-bottom:25px;
+}
 
-    .steps{
-      margin:0; padding-left:18px;
-      color:rgba(248,231,183,.78);
-    }
-    .steps li{margin:10px 0}
-    .small{
-      margin-top:12px;
-      font-size:12px;
-      color:rgba(248,231,183,.62);
-    }
+/* ===== BUTTON ===== */
+.whBtn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  font-weight:900;
+  padding:16px 24px;
+  border-radius:18px;
+  border:1px solid rgba(248,231,183,.4);
+  color:#2b1600;
+  background:
+    radial-gradient(120% 180% at 50% 0%, rgba(248,231,183,.9), rgba(249,194,32,.9) 40%, rgba(215,74,9,.3) 100%);
+  box-shadow:0 20px 40px rgba(249,194,32,.25);
+  transition:all .2s ease;
+}
+.whBtn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 25px 60px rgba(249,194,32,.4);
+}
 
-    .cta{
-      display:flex; flex-direction:column; gap:12px;
-      justify-content:space-between;
-    }
+.small{
+  font-size:12px;
+  margin-top:15px;
+  opacity:.7;
+}
 
-    .whBtn{
-      display:flex; align-items:center; justify-content:center;
-      gap:10px;
-      text-decoration:none;
-      font-weight:1000;
-      padding:14px 14px;
-      border-radius:18px;
-      border:1px solid rgba(248,231,183,.30);
-      color:#2b1600;
-      background:
-        radial-gradient(120% 180% at 50% 0%, rgba(248,231,183,.85), rgba(249,194,32,.85) 40%, rgba(215,74,9,.35) 100%),
-        linear-gradient(180deg, var(--gold2), var(--gold));
-      box-shadow: 0 18px 40px rgba(249,194,32,.18), 0 18px 60px rgba(0,0,0,.45);
-      transform: translateY(0);
-      transition: transform .15s ease, filter .15s ease;
-    }
-    .whBtn:active{transform: translateY(1px); filter: brightness(.98);}
-    .whIcon{
-      width:22px;height:22px; display:inline-block;
-      border-radius:6px;
-      background: rgba(0,0,0,.18);
-      border:1px solid rgba(0,0,0,.18);
-      position:relative;
-    }
-    .whIcon::before{
-      content:"";
-      position:absolute; inset:4px 5px 5px 4px;
-      border-radius:50%;
-      border:2px solid rgba(0,0,0,.55);
-      clip-path: polygon(0% 0%,100% 0%,100% 78%,56% 78%,45% 100%,38% 78%,0% 78%);
-      opacity:.55;
-    }
-
-    .sticky{
-      position:fixed; left:0; right:0; bottom:0;
-      padding:10px 12px;
-      background: linear-gradient(180deg, transparent, rgba(0,0,0,.55));
-      backdrop-filter: blur(6px);
-      border-top:1px solid rgba(248,231,183,.10);
-      z-index:3; /* above everything */
-    }
-    .stickyInner{max-width:980px;margin:0 auto;}
-    .sticky .whBtn{border-radius:16px;padding:14px}
-
-    @media (max-width: 860px){
-      .hero{grid-template-columns:1fr;}
-      h1{font-size:32px}
-      .wrap{padding-bottom:130px}
-    }
-  </style>
+/* ===== STICKY BUTTON ===== */
+.sticky{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:10px;
+  background:linear-gradient(180deg, transparent, rgba(0,0,0,.7));
+  text-align:center;
+  z-index:3;
+}
+</style>
 </head>
 
 <body>
-  <!-- Coin Rain Background -->
-  <div class="coin-rain" id="coinRain" aria-hidden="true"></div>
 
-  <div class="wrap">
-    <div class="top">
-      <div class="brand">ROCK-9.com</div>
-      <div class="pill">FAST & SECURE</div>
-    </div>
+<!-- Coin Rain Background -->
+<div class="coin-rain" id="coinRain"></div>
 
-    <div class="hero">
-      <section class="card">
-        <h1>Exclusive Bonus</h1>
-        <p class="sub">Fast verification • Quick guide • One-to-one support on WhatsApp.</p>
+<div class="wrap">
+  <div class="brand">Rock9.com</div>
 
-        <div class="offerBox">
-          <div class="offerTitle">Exclusive Offer</div>
-          <p class="offerBig">99% BONUS</p>
-          <p class="note">Tap Claim Now to claim — 99% exclusive bonus.</p>
-        </div>
+  <div class="card">
+    <h1>Exclusive Welcome Bonus</h1>
+    <div class="bonus">99% BONUS</div>
+    <div class="sub">Tap WhatsApp now to claim your welcome reward instantly.</div>
 
-        <div class="goldLine"></div>
+    <a id="waBtnTop" class="whBtn" href="#" target="_blank">
+      WhatsApp Now (Claim Bonus)
+    </a>
 
-        <div class="badgeRow">
-          <div class="badge">✅ Quick & Simple Steps</div>
-          <div class="badge">✅ Secure Support Chat</div>
-          <div class="badge">✅ Mobile-Friendly</div>
-        </div>
-
-        <p class="small">
-          If WhatsApp doesn’t open, please update WhatsApp or try using mobile data.
-        </p>
-      </section>
-
-      <aside class="card cta">
-        <div>
-          <h2 style="margin:0 0 8px; font-size:18px; letter-spacing:.3px;">How it works</h2>
-          <ol class="steps">
-            <li>Tap the Claim Now button</li>
-            <li>Send the auto message</li>
-            <li>Follow our guide to claim your bonus</li>
-          </ol>
-        </div>
-
-        <!-- Desktop button -->
-        <a id="waBtnTop" class="whBtn" href="#" target="_blank" rel="noopener">
-          <span class="whIcon" aria-hidden="true"></span>
-          Claim Now
-        </a>
-
-        <div class="small">
-          By contacting us, you agree to receive messages related to your request.
-        </div>
-      </aside>
+    <div class="small">
+      Official Rock9 WhatsApp Support
     </div>
   </div>
+</div>
 
-  <!-- Mobile sticky button -->
-  <div class="sticky">
-    <div class="stickyInner">
-      <a id="waBtnSticky" class="whBtn" href="#" target="_blank" rel="noopener">
-        <span class="whIcon" aria-hidden="true"></span>
-        Claim Now
-      </a>
-    </div>
-  </div>
+<!-- Sticky Button -->
+<div class="sticky">
+  <a id="waBtnSticky" class="whBtn" href="#" target="_blank">
+    WhatsApp Now
+  </a>
+</div>
 
-  <script>
-    // ✅ CHANGE THIS (no + sign, no spaces)
-    // Malaysia example: 60123456789 | AU example: 61412345678
-    const WA_NUMBER = "61402342254";
+<script>
+// ===== CHANGE THIS NUMBER (no + sign) =====
+const WA_NUMBER = "60123456789";
 
-    // Auto message + include UTM for tracking from Facebook ads
-const params = new URLSearchParams(window.location.search);
-const utm_source = params.get("utm_source") || "facebook";
-const utm_campaign = params.get("utm_campaign") || "rock9";
-const utm_adset = params.get("utm_adset") || "";
-const utm_ad = params.get("utm_content") || "";
+// Clean auto message (no tracking info)
+const msg = "Hi Rock9.com, I want to claim the 99% Welcome Bonus.";
 
-const msg =
-`Hi Rock9.com, I want to claim the welcome bonus.
-Source: ${utm_source}
-Campaign: ${utm_campaign}
-Adset: ${utm_adset}
-Ad: ${utm_ad}`;
+const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 
-    const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-    document.getElementById("waBtnTop").href = waLink;
-    document.getElementById("waBtnSticky").href = waLink;
+document.getElementById("waBtnTop").href = waLink;
+document.getElementById("waBtnSticky").href = waLink;
 
-    // ===== Coin Rain Generator =====
-    const rainContainer = document.getElementById("coinRain");
+// ===== COIN RAIN GENERATOR =====
+const rainContainer = document.getElementById("coinRain");
 
-    function createCoin() {
-      const coin = document.createElement("div");
-      coin.className = "coin";
+function createCoin() {
+  const coin = document.createElement("div");
+  coin.className = "coin";
 
-      coin.style.left = (Math.random() * 100) + "vw";
-      coin.style.animationDuration = (3 + Math.random() * 4) + "s";
-      coin.style.opacity = (0.45 + Math.random() * 0.5).toFixed(2);
-      coin.style.width = coin.style.height = (16 + Math.random() * 22).toFixed(0) + "px";
+  coin.style.left = Math.random() * 100 + "vw";
+  coin.style.animationDuration = (3 + Math.random() * 4) + "s";
+  coin.style.opacity = 0.5 + Math.random() * 0.5;
+  coin.style.width = coin.style.height = (15 + Math.random() * 25) + "px";
 
-      // slight horizontal drift
-      const drift = (Math.random() * 40 - 20).toFixed(1);
-      coin.animate(
-        [
-          { transform: `translate(0, 0) rotate(0deg)` },
-          { transform: `translate(${drift}px, 115vh) rotate(720deg)` }
-        ],
-        { duration: parseFloat(coin.style.animationDuration) * 1000, iterations: 1, easing: "linear" }
-      );
+  rainContainer.appendChild(coin);
 
-      rainContainer.appendChild(coin);
+  setTimeout(() => coin.remove(), 7000);
+}
 
-      // remove after it falls
-      setTimeout(() => coin.remove(), 8000);
-    }
+// Adjust speed (lower number = more coins)
+setInterval(createCoin, 180);
+</script>
 
-    // coin density (lower = more coins)
-    setInterval(createCoin, 170);
-  </script>
 </body>
 </html>
