@@ -58,7 +58,6 @@ body{
   text-align:center;
 }
 
-/* LOGO */
 .brandLogo{
   width:min(520px, 92vw);
   height:auto;
@@ -67,10 +66,8 @@ body{
   filter: drop-shadow(0 20px 40px rgba(0,0,0,.6));
 }
 
-/* 99% TEXT BELOW LOGO */
 .brandSub{
   font-weight:1000;
-  letter-spacing:.4px;
   margin:0 0 14px;
   font-size:22px;
   background:linear-gradient(180deg,var(--gold2),var(--gold));
@@ -79,7 +76,6 @@ body{
   text-transform:uppercase;
 }
 
-/* CARD */
 .card{
   background:rgba(0,0,0,.25);
   border:1px solid rgba(248,231,183,.25);
@@ -88,11 +84,7 @@ body{
   box-shadow:0 20px 60px rgba(0,0,0,.6);
 }
 
-h1{
-  margin:0 0 10px;
-  font-size:30px;
-  text-transform:uppercase;
-}
+h1{margin:0 0 10px;font-size:30px;text-transform:uppercase;}
 
 .bonus{
   font-size:48px;
@@ -103,13 +95,8 @@ h1{
   color:transparent;
 }
 
-.sub{
-  color:rgba(248,231,183,.85);
-  margin-bottom:25px;
-  font-size:15px;
-}
+.sub{margin-bottom:25px;font-size:15px;}
 
-/* ===== BUTTON ===== */
 .whBtn{
   display:inline-flex;
   align-items:center;
@@ -124,31 +111,18 @@ h1{
   background:
     radial-gradient(120% 180% at 50% 0%, rgba(248,231,183,.9), rgba(249,194,32,.9) 40%, rgba(215,74,9,.3) 100%);
   box-shadow:0 20px 50px rgba(249,194,32,.35);
-  transition:all .2s ease;
-}
-.whBtn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 30px 70px rgba(249,194,32,.45);
 }
 
-.small{
-  font-size:12px;
-  margin-top:18px;
-  opacity:.7;
-}
+.small{font-size:12px;margin-top:18px;opacity:.7;}
 
-/* ===== LIVE CLAIM (TOP CENTER) ===== */
+/* ===== SINGLE TOP CENTER TOAST ===== */
 .live-toasts{
   position: fixed;
   top: 12px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   pointer-events: none;
-  align-items: center;
 }
 
 .toast{
@@ -163,17 +137,12 @@ h1{
   grid-template-columns: 38px 1fr;
   gap: 10px;
   align-items: center;
-  opacity: 0;
-  transform: translateY(-10px);
-  animation: toastIn .35s ease forwards, toastOut .35s ease forwards;
-  animation-delay: 0s, var(--outDelay);
+  animation: fadeIn .3s ease;
 }
 
-@keyframes toastIn{
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes toastOut{
-  to { opacity: 0; transform: translateY(-10px); }
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(-10px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
 .coinBadge{
@@ -181,39 +150,18 @@ h1{
   height: 38px;
   border-radius: 14px;
   background: radial-gradient(circle at 30% 30%, var(--gold2), var(--gold) 45%, var(--orange) 95%);
-  box-shadow: 0 0 14px rgba(249,194,32,.35);
 }
 
 .toastTitleRow{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
 }
 
-.toastTitle{
-  font-weight:1000;
-  font-size:13px;
-  margin:0;
-}
-
-.toastTime{
-  font-size:11px;
-  opacity:.7;
-}
-
-.toastSub{
-  margin:2px 0 0;
-  font-size:12px;
-  opacity:.8;
-}
-
-.tagLive{
-  font-size:10px;
-  padding:2px 6px;
-  border-radius:999px;
-  background: rgba(215,74,9,.25);
-  margin-left:6px;
-}
+.toastTitle{font-weight:1000;font-size:13px;margin:0;}
+.toastTime{font-size:11px;opacity:.7;}
+.toastSub{margin:2px 0 0;font-size:12px;opacity:.8;}
+.tagLive{font-size:10px;padding:2px 6px;border-radius:999px;background:rgba(215,74,9,.25);margin-left:6px;}
 </style>
 </head>
 
@@ -223,8 +171,6 @@ h1{
 <div class="live-toasts" id="liveToasts"></div>
 
 <div class="wrap">
-
-  <!-- Make sure this file exists in same folder -->
   <img class="brandLogo" src="Logo-Rectangle.png" alt="Rock9 Logo">
   <div class="brandSub">99% Welcome Bonus</div>
 
@@ -242,15 +188,15 @@ h1{
 </div>
 
 <script>
-const WA_NUMBER = "60123456789";
-const msg = "Hi Rock9.com, I want to claim the 99% Welcome Bonus.";
-document.getElementById("waBtnTop").href =
+const WA_NUMBER="60123456789";
+const msg="Hi Rock9.com, I want to claim the 99% Welcome Bonus.";
+document.getElementById("waBtnTop").href=
 `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 
 /* Coin Rain */
-const rain = document.getElementById("coinRain");
+const rain=document.getElementById("coinRain");
 function createCoin(){
-  const c = document.createElement("div");
+  const c=document.createElement("div");
   c.className="coin";
   c.style.left=Math.random()*100+"vw";
   c.style.animationDuration=(3+Math.random()*4)+"s";
@@ -261,8 +207,8 @@ function createCoin(){
 }
 setInterval(createCoin,180);
 
-/* Fake Live Claim with Time */
-const toasts=document.getElementById("liveToasts");
+/* Single Toast */
+const container=document.getElementById("liveToasts");
 const names=["Ahmad","Jason","Kelvin","Wei Jie","Jun Hao","Siti","Alya","Daniel"];
 const amounts=[50,80,120,150,200,250,300,500,800];
 
@@ -270,11 +216,11 @@ function mask(n){return n.slice(0,2)+"***";}
 function pick(a){return a[Math.floor(Math.random()*a.length)];}
 function now(){return new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});}
 
-function toast(){
+function showToast(){
+  container.innerHTML=""; // remove old one
+
   const t=document.createElement("div");
-  const life=2600+Math.random()*1400;
   t.className="toast";
-  t.style.setProperty("--outDelay",(life/1000)+"s");
   t.innerHTML=`
     <div class="coinBadge"></div>
     <div>
@@ -284,14 +230,13 @@ function toast(){
       </div>
       <p class="toastSub">Welcome bonus successfully redeemed</p>
     </div>`;
-  toasts.prepend(t);
-  while(toasts.children.length>2) toasts.lastElementChild.remove();
-  setTimeout(()=>t.remove(),life+500);
+  container.appendChild(t);
+
+  setTimeout(()=>{container.innerHTML="";},3000);
 }
-setTimeout(toast,900);
-(function loop(){
-  setTimeout(()=>{toast();loop();},2200+Math.random()*2200);
-})();
+
+setTimeout(showToast,900);
+setInterval(showToast,4000);
 </script>
 
 </body>
