@@ -1,92 +1,52 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Welcome</title>
-  <meta name="description" content="Simple landing page for Facebook Ads" />
-  <style>
-    :root { --bg:#0b1220; --card:#101a33; --txt:#eaf0ff; --muted:#b7c3e6; --cta:#2f6bff; }
-    * { box-sizing: border-box; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; }
-    body { margin:0; background: radial-gradient(1200px 600px at 20% 0%, #172a5a, var(--bg)); color:var(--txt); }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 28px 18px 46px; }
-    .top { display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .brand { font-weight:800; letter-spacing:.3px; }
-    .badge { padding:8px 12px; border:1px solid rgba(255,255,255,.15); border-radius:999px; color:var(--muted); font-size:13px; }
-    .hero { margin-top: 22px; display:grid; grid-template-columns: 1.2fr .8fr; gap: 16px; }
-    .card { background: rgba(16,26,51,.85); border:1px solid rgba(255,255,255,.12); border-radius:18px; padding:18px; box-shadow: 0 12px 30px rgba(0,0,0,.25); }
-    h1 { margin:0 0 10px; font-size: 34px; line-height: 1.15; }
-    p { margin:0 0 14px; color: var(--muted); }
-    ul { margin: 0; padding-left: 18px; color: var(--muted); }
-    li { margin: 8px 0; }
-    .ctaRow { display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px; }
-    a.btn { text-decoration:none; padding:12px 14px; border-radius:12px; font-weight:700; display:inline-flex; align-items:center; gap:8px; }
-    .primary { background: var(--cta); color: white; }
-    .ghost { border:1px solid rgba(255,255,255,.2); color: var(--txt); background: rgba(255,255,255,.06); }
-    .small { font-size: 13px; color: var(--muted); margin-top: 10px; }
-    .form { display:grid; gap:10px; }
-    input { width:100%; padding:12px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.15); background: rgba(0,0,0,.25); color: var(--txt); outline:none; }
-    button { cursor:pointer; border:0; padding:12px 14px; border-radius:12px; font-weight:800; background: #20c997; color:#06251b; }
-    .footer { margin-top: 18px; color: rgba(255,255,255,.55); font-size: 12px; }
-    @media (max-width: 820px) { .hero { grid-template-columns: 1fr; } h1 { font-size: 30px; } }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <div class="top">
-      <div class="brand">Your Brand</div>
-      <div class="badge">Fast • Simple • Mobile-ready</div>
-    </div>
+<style>
+  :root{
+    --bg0:#220603;
+    --bg1:#400A04;
 
-    <div class="hero">
-      <div class="card">
-        <h1>Claim Your Welcome Offer</h1>
-        <p>Quick steps, fast response. Tap below to contact and get started.</p>
+    --gold1:#F1D869;
+    --gold2:#F8A419;
+    --gold3:#D96912;
 
-        <ul>
-          <li>Instant support via WhatsApp / Telegram</li>
-          <li>Clear process, no complicated steps</li>
-          <li>Mobile-friendly and fast loading</li>
-        </ul>
+    --red1:#C01705;
+    --red2:#8B1507;
 
-        <div class="ctaRow">
-          <!-- CHANGE THESE LINKS -->
-          <a class="btn primary" href="https://wa.me/601172412216" target="_blank" rel="noopener">WhatsApp Now</a>
-          <a class="btn ghost" href="https://t.me/kaka2_8" target="_blank" rel="noopener">Telegram</a>
-        </div>
+    --text:#FFF3D6;
+    --muted:#F1D869;
+  }
 
-        <div class="small">By continuing, you agree to our basic terms & anti-spam policy.</div>
-      </div>
+  body{
+    margin:0;
+    color:var(--text);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    background:
+      radial-gradient(900px 500px at 50% 15%, rgba(248,164,25,.35), transparent 60%),
+      radial-gradient(800px 600px at 20% 0%, rgba(192,23,5,.25), transparent 55%),
+      linear-gradient(180deg, var(--bg1), var(--bg0));
+  }
 
-      <div class="card">
-        <h2 style="margin:0 0 10px;">Request a Callback</h2>
-        <p style="margin:0 0 12px;">Leave your name & number — we’ll contact you.</p>
+  .wrap{ max-width:900px; margin:0 auto; padding:40px 18px 60px; text-align:center; }
+  h1{ margin:0 0 10px; font-size:34px; }
+  p{ margin:0 0 22px; color:rgba(255,243,214,.85); }
 
-        <!-- This is a simple "open WhatsApp with prefilled message" form (no backend needed). -->
-        <form class="form" onsubmit="return sendToWhatsApp(event)">
-          <input id="name" placeholder="Your name" required />
-          <input id="phone" placeholder="Your phone (e.g. 012-xxx xxxx)" required />
-          <button type="submit">Submit</button>
-        </form>
-
-        <div class="footer">
-          Tip: For better tracking, add UTM parameters to your ad link.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function sendToWhatsApp(e) {
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const msg = encodeURIComponent(`Hi, I want to claim the welcome offer.\nName: ${name}\nPhone: ${phone}`);
-      // CHANGE NUMBER HERE (no + sign)
-      const waNumber = "601172412216";
-      window.open(`https://wa.me/${waNumber}?text=${msg}`, "_blank");
-      return false;
-    }
-  </script>
-</body>
-</html>
+  .wa-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    text-decoration:none;
+    padding:14px 18px;
+    border-radius:14px;
+    font-weight:900;
+    color:#2a1206;
+    background: linear-gradient(180deg, var(--gold1), var(--gold2) 45%, var(--gold3));
+    border:1px solid rgba(241,216,105,.55);
+    box-shadow:
+      0 14px 35px rgba(0,0,0,.45),
+      0 0 0 3px rgba(192,23,5,.12),
+      0 0 28px rgba(248,164,25,.25);
+    transform: translateY(0);
+    transition: .18s ease;
+  }
+  .wa-btn:hover{ transform: translateY(-2px); filter:saturate(1.05); }
+  .wa-sub{ margin-top:10px; font-size:12px; color:rgba(241,216,105,.85); }
+</style>
