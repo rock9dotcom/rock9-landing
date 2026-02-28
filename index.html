@@ -29,28 +29,48 @@
       overflow-x:hidden;
     }
 
-    /* confetti-ish glow dots */
-    .sparkle::before{
-      content:"";
-      position:fixed; inset:-20%;
-      background:
-        radial-gradient(circle at 10% 20%, rgba(249,194,32,.22) 0 2px, transparent 3px),
-        radial-gradient(circle at 35% 10%, rgba(215,74,9,.22) 0 2px, transparent 3px),
-        radial-gradient(circle at 80% 30%, rgba(249,194,32,.18) 0 2px, transparent 3px),
-        radial-gradient(circle at 70% 80%, rgba(215,74,9,.20) 0 2px, transparent 3px),
-        radial-gradient(circle at 20% 85%, rgba(249,194,32,.16) 0 2px, transparent 3px);
-      filter: blur(0.2px);
-      opacity:.9;
-      transform: rotate(-6deg);
-      pointer-events:none;
-      animation: float 10s ease-in-out infinite;
+    /* ===== COIN RAIN LAYER ===== */
+    .coin-rain{
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
     }
-    @keyframes float{
-      0%,100%{transform:translateY(0) rotate(-6deg)}
-      50%{transform:translateY(-14px) rotate(-6deg)}
+    .coin{
+      position:absolute;
+      top:-80px;
+      width:26px;
+      height:26px;
+      border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, var(--gold2), var(--gold) 45%, var(--orange) 95%);
+      box-shadow: 0 0 12px rgba(249,194,32,.55);
+      animation: fall linear infinite;
+      opacity:.85;
+      filter: saturate(1.08);
+    }
+    .coin::after{
+      content:"";
+      position:absolute;
+      inset:5px;
+      border-radius:50%;
+      border: 2px solid rgba(0,0,0,.25);
+      opacity:.55;
+    }
+    @keyframes fall{
+      0%{ transform: translateY(0) rotate(0deg); }
+      100%{ transform: translateY(115vh) rotate(720deg); }
     }
 
-    .wrap{max-width:980px;margin:0 auto;padding:26px 16px 90px;}
+    /* ===== CONTENT ===== */
+    .wrap{
+      max-width:980px;
+      margin:0 auto;
+      padding:26px 16px 100px;
+      position:relative;
+      z-index:2; /* above coin rain */
+    }
+
     .top{
       display:flex;align-items:center;justify-content:space-between;gap:12px;
       padding:10px 12px;border:1px solid rgba(248,231,183,.15);
@@ -189,6 +209,7 @@
       background: linear-gradient(180deg, transparent, rgba(0,0,0,.55));
       backdrop-filter: blur(6px);
       border-top:1px solid rgba(248,231,183,.10);
+      z-index:3; /* above everything */
     }
     .stickyInner{max-width:980px;margin:0 auto;}
     .sticky .whBtn{border-radius:16px;padding:14px}
@@ -196,12 +217,15 @@
     @media (max-width: 860px){
       .hero{grid-template-columns:1fr;}
       h1{font-size:32px}
-      .wrap{padding-bottom:120px}
+      .wrap{padding-bottom:130px}
     }
   </style>
 </head>
 
-<body class="sparkle">
+<body>
+  <!-- Coin Rain Background -->
+  <div class="coin-rain" id="coinRain" aria-hidden="true"></div>
+
   <div class="wrap">
     <div class="top">
       <div class="brand">Rock9.com</div>
@@ -214,9 +238,9 @@
         <p class="sub">Fast verification • Quick guide • One-to-one support on WhatsApp.</p>
 
         <div class="offerBox">
-          <div class="offerTitle">New Member Exclusive</div>
+          <div class="offerTitle">Today’s Offer</div>
           <p class="offerBig">99% BONUS</p>
-          <p class="note">Tap Claim Now to claim — our team will reply ASAP.</p>
+          <p class="note">Tap WhatsApp to claim — our team will reply ASAP.</p>
         </div>
 
         <div class="goldLine"></div>
@@ -236,7 +260,7 @@
         <div>
           <h2 style="margin:0 0 8px; font-size:18px; letter-spacing:.3px;">How it works</h2>
           <ol class="steps">
-            <li>Tap the Claim Now button</li>
+            <li>Tap the WhatsApp button</li>
             <li>Send the auto message</li>
             <li>Follow our guide to claim your bonus</li>
           </ol>
@@ -245,7 +269,7 @@
         <!-- Desktop button -->
         <a id="waBtnTop" class="whBtn" href="#" target="_blank" rel="noopener">
           <span class="whIcon" aria-hidden="true"></span>
-          Claim Now (Claim Bonus)
+          WhatsApp Now (Claim Bonus)
         </a>
 
         <div class="small">
@@ -260,16 +284,17 @@
     <div class="stickyInner">
       <a id="waBtnSticky" class="whBtn" href="#" target="_blank" rel="noopener">
         <span class="whIcon" aria-hidden="true"></span>
-        Claim Now Now (Claim Bonus)
+        WhatsApp Now (Claim Bonus)
       </a>
     </div>
   </div>
 
   <script>
-    // ✅ CHANGE THIS:
-    const WA_NUMBER = "60123456789"; // no + sign (example: Malaysia 60..., SG 65..., AU 61...)
+    // ✅ CHANGE THIS (no + sign, no spaces)
+    // Malaysia example: 60123456789 | AU example: 61412345678
+    const WA_NUMBER = "60123456789";
 
-    // Auto message + carry UTM params into the message for tracking
+    // Auto message + include UTM for tracking from Facebook ads
     const params = new URLSearchParams(window.location.search);
     const utm_source = params.get("utm_source") || "facebook";
     const utm_campaign = params.get("utm_campaign") || "rock9";
@@ -284,9 +309,39 @@ Adset: ${utm_adset}
 Ad: ${utm_ad}`;
 
     const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-
     document.getElementById("waBtnTop").href = waLink;
     document.getElementById("waBtnSticky").href = waLink;
+
+    // ===== Coin Rain Generator =====
+    const rainContainer = document.getElementById("coinRain");
+
+    function createCoin() {
+      const coin = document.createElement("div");
+      coin.className = "coin";
+
+      coin.style.left = (Math.random() * 100) + "vw";
+      coin.style.animationDuration = (3 + Math.random() * 4) + "s";
+      coin.style.opacity = (0.45 + Math.random() * 0.5).toFixed(2);
+      coin.style.width = coin.style.height = (16 + Math.random() * 22).toFixed(0) + "px";
+
+      // slight horizontal drift
+      const drift = (Math.random() * 40 - 20).toFixed(1);
+      coin.animate(
+        [
+          { transform: `translate(0, 0) rotate(0deg)` },
+          { transform: `translate(${drift}px, 115vh) rotate(720deg)` }
+        ],
+        { duration: parseFloat(coin.style.animationDuration) * 1000, iterations: 1, easing: "linear" }
+      );
+
+      rainContainer.appendChild(coin);
+
+      // remove after it falls
+      setTimeout(() => coin.remove(), 8000);
+    }
+
+    // coin density (lower = more coins)
+    setInterval(createCoin, 170);
   </script>
 </body>
 </html>
