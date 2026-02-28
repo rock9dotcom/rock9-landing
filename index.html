@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Rock9.com — 99% Welcome Bonus</title>
+<title>ROCK9.com — 99% Exclusive Bonus</title>
 
 <style>
 :root{
@@ -172,18 +172,18 @@ h1{margin:0 0 10px;font-size:30px;text-transform:uppercase;}
 
 <div class="wrap">
   <img class="brandLogo" src="Logo-Rectangle.png" alt="Rock9 Logo">
-  <div class="brandSub">99% Welcome Bonus</div>
+  <div class="brandSub">99% Exclusive Bonus</div>
 
   <div class="card">
-    <h1>Exclusive Welcome Offer</h1>
-    <div class="bonus">99% BONUS</div>
-    <div class="sub">Tap WhatsApp now to claim your welcome reward instantly.</div>
+    <h1>Exclusive Welcome Bonus</h1>
+    <div class="bonus">99%</div>
+    <div class="sub">Tap Claim now to claim your welcome bonus instantly.</div>
 
     <a id="waBtnTop" class="whBtn" href="#" target="_blank">
-      WhatsApp Now (Claim Bonus)
+      Claim Now
     </a>
 
-    <div class="small">Official Rock9 WhatsApp Support</div>
+    <div class="small">Official ROCK9.com</div>
   </div>
 </div>
 
@@ -191,8 +191,8 @@ h1{margin:0 0 10px;font-size:30px;text-transform:uppercase;}
 /* =========================
    WhatsApp Setup
 ========================= */
-const WA_NUMBER = "60123456789";
-const msg = "Hi Rock9.com, I want to claim the 99% Welcome Bonus.";
+const WA_NUMBER = "61402342254";
+const msg = "Hi ROCK9.com, I want to claim the 99% Welcome Bonus.";
 const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 
 const waBtn = document.getElementById("waBtnTop");
@@ -218,8 +218,8 @@ setInterval(createCoin,180);
    Single Toast
 ========================= */
 const container=document.getElementById("liveToasts");
-const names=["Ahmad","Jason","Kelvin","Wei Jie","Jun Hao","Siti","Alya","Daniel"];
-const amounts=[50,80,120,150,200,250,300,500,800];
+const names=["Zane","Ives","Victoria","Joseph","Hayden","Angelina","Neville","Charli","Jesse","Jageurs","Sean","Charlotte","Julian","Rebecca","Makayla"];
+const amounts=[50,80,120,150,200,250,300,500,800,1000,1200,1500,1800,2000];
 
 function mask(n){return n.slice(0,2)+"***";}
 function pick(a){return a[Math.floor(Math.random()*a.length)];}
@@ -233,7 +233,7 @@ function showToast(){
     <div class="coinBadge"></div>
     <div>
       <div class="toastTitleRow">
-        <p class="toastTitle">${mask(pick(names))} claimed RM${pick(amounts)} <span class="tagLive">LIVE</span></p>
+        <p class="toastTitle">${mask(pick(names))} claimed AUD${pick(amounts)} <span class="tagLive">LIVE</span></p>
         <p class="toastTime">${now()}</p>
       </div>
       <p class="toastSub">Welcome bonus successfully redeemed</p>
