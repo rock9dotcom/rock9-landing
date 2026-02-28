@@ -188,12 +188,19 @@ h1{margin:0 0 10px;font-size:30px;text-transform:uppercase;}
 </div>
 
 <script>
-const WA_NUMBER="60123456789";
-const msg="Hi Rock9.com, I want to claim the 99% Welcome Bonus.";
-document.getElementById("waBtnTop").href=
-`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+/* =========================
+   WhatsApp Setup
+========================= */
+const WA_NUMBER = "60123456789";
+const msg = "Hi Rock9.com, I want to claim the 99% Welcome Bonus.";
+const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 
-/* Coin Rain */
+const waBtn = document.getElementById("waBtnTop");
+waBtn.href = waLink;
+
+/* =========================
+   Coin Rain
+========================= */
 const rain=document.getElementById("coinRain");
 function createCoin(){
   const c=document.createElement("div");
@@ -207,7 +214,9 @@ function createCoin(){
 }
 setInterval(createCoin,180);
 
-/* Single Toast */
+/* =========================
+   Single Toast
+========================= */
 const container=document.getElementById("liveToasts");
 const names=["Ahmad","Jason","Kelvin","Wei Jie","Jun Hao","Siti","Alya","Daniel"];
 const amounts=[50,80,120,150,200,250,300,500,800];
@@ -217,8 +226,7 @@ function pick(a){return a[Math.floor(Math.random()*a.length)];}
 function now(){return new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});}
 
 function showToast(){
-  container.innerHTML=""; // remove old one
-
+  container.innerHTML="";
   const t=document.createElement("div");
   t.className="toast";
   t.innerHTML=`
@@ -231,12 +239,29 @@ function showToast(){
       <p class="toastSub">Welcome bonus successfully redeemed</p>
     </div>`;
   container.appendChild(t);
-
   setTimeout(()=>{container.innerHTML="";},3000);
 }
-
 setTimeout(showToast,900);
 setInterval(showToast,4000);
+
+/* =========================
+   AUTO REDIRECT AFTER 5 SECONDS
+========================= */
+
+let userClicked = false;
+
+// If user manually clicks button, stop auto redirect
+waBtn.addEventListener("click", () => {
+  userClicked = true;
+});
+
+// Redirect after 5 seconds
+setTimeout(() => {
+  if (!userClicked) {
+    window.location.href = waLink;
+  }
+}, 5000);
+
 </script>
 
 </body>
