@@ -1,63 +1,292 @@
-<style>
-  :root{
-    --bg0:#220603;
-    --bg1:#400A04;
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rock9.com — Welcome Bonus</title>
+  <meta name="description" content="Rock9.com landing page" />
 
-    --gold1:#F1D869;
-    --gold2:#F8A419;
-    --gold3:#D96912;
+  <style>
+    :root{
+      --bg:#360904;
+      --red:#841D09;
+      --orange:#D74A09;
+      --gold:#F9C220;
+      --gold2:#F8E7B7;
+      --muted:#87846F;
+      --card: rgba(255,255,255,.06);
+      --stroke: rgba(248,231,183,.20);
+    }
 
-    --red1:#C01705;
-    --red2:#8B1507;
+    *{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+    body{
+      margin:0; color:var(--gold2);
+      background:
+        radial-gradient(900px 500px at 20% 0%, rgba(215,74,9,.55), transparent 60%),
+        radial-gradient(900px 500px at 85% 25%, rgba(249,194,32,.35), transparent 55%),
+        radial-gradient(800px 500px at 50% 110%, rgba(249,194,32,.25), transparent 55%),
+        linear-gradient(180deg, #1a0403 0%, var(--bg) 35%, #120202 100%);
+      overflow-x:hidden;
+    }
 
-    --text:#FFF3D6;
-    --muted:#F1D869;
-  }
+    /* confetti-ish glow dots */
+    .sparkle::before{
+      content:"";
+      position:fixed; inset:-20%;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(249,194,32,.22) 0 2px, transparent 3px),
+        radial-gradient(circle at 35% 10%, rgba(215,74,9,.22) 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 30%, rgba(249,194,32,.18) 0 2px, transparent 3px),
+        radial-gradient(circle at 70% 80%, rgba(215,74,9,.20) 0 2px, transparent 3px),
+        radial-gradient(circle at 20% 85%, rgba(249,194,32,.16) 0 2px, transparent 3px);
+      filter: blur(0.2px);
+      opacity:.9;
+      transform: rotate(-6deg);
+      pointer-events:none;
+      animation: float 10s ease-in-out infinite;
+    }
+    @keyframes float{
+      0%,100%{transform:translateY(0) rotate(-6deg)}
+      50%{transform:translateY(-14px) rotate(-6deg)}
+    }
 
-  body{
-    margin:0;
-    color:var(--text);
-    font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
-    background:
-      radial-gradient(900px 500px at 50% 15%, rgba(248,164,25,.35), transparent 60%),
-      radial-gradient(800px 600px at 20% 0%, rgba(192,23,5,.25), transparent 55%),
-      linear-gradient(180deg, var(--bg1), var(--bg0));
-  }
+    .wrap{max-width:980px;margin:0 auto;padding:26px 16px 90px;}
+    .top{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:10px 12px;border:1px solid rgba(248,231,183,.15);
+      border-radius:16px;background:rgba(0,0,0,.18);
+      backdrop-filter: blur(6px);
+    }
+    .brand{
+      font-weight:900;letter-spacing:.6px;
+      background:linear-gradient(180deg,var(--gold2),var(--gold));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .pill{
+      font-size:12px;color:rgba(248,231,183,.85);
+      padding:7px 10px;border-radius:999px;
+      border:1px solid rgba(248,231,183,.18);
+      background:rgba(132,29,9,.22);
+      white-space:nowrap;
+    }
 
-  .wrap{ max-width:900px; margin:0 auto; padding:40px 18px 60px; text-align:center; }
-  h1{ margin:0 0 10px; font-size:34px; }
-  p{ margin:0 0 22px; color:rgba(255,243,214,.85); }
+    .hero{
+      margin-top:16px;
+      display:grid;grid-template-columns:1.15fr .85fr;gap:14px;
+      align-items:stretch;
+    }
+    .card{
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(0,0,0,.10));
+      border:1px solid var(--stroke);
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::after{
+      content:"";
+      position:absolute; inset:-2px;
+      background:radial-gradient(600px 220px at 35% -10%, rgba(249,194,32,.25), transparent 60%);
+      pointer-events:none;
+    }
 
-  .wa-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    text-decoration:none;
-    padding:14px 18px;
-    border-radius:14px;
-    font-weight:900;
-    color:#2a1206;
-    background: linear-gradient(180deg, var(--gold1), var(--gold2) 45%, var(--gold3));
-    border:1px solid rgba(241,216,105,.55);
-    box-shadow:
-      0 14px 35px rgba(0,0,0,.45),
-      0 0 0 3px rgba(192,23,5,.12),
-      0 0 28px rgba(248,164,25,.25);
-    transform: translateY(0);
-    transition: .18s ease;
-  }
-  .wa-btn:hover{ transform: translateY(-2px); filter:saturate(1.05); }
-  .wa-sub{ margin-top:10px; font-size:12px; color:rgba(241,216,105,.85); }
-</style>
+    h1{
+      margin:0 0 10px;
+      font-size:38px; line-height:1.08;
+      text-transform:uppercase;
+      letter-spacing:.3px;
+    }
+    .sub{margin:0 0 16px;color:rgba(248,231,183,.82);font-size:15px}
 
-<div class="wrap">
-  <h1>Welcome Bonus</h1>
-  <p>Tap WhatsApp to claim your offer now.</p>
+    .badgeRow{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 16px}
+    .badge{
+      font-size:13px;
+      color:rgba(248,231,183,.92);
+      border:1px solid rgba(248,231,183,.16);
+      background:rgba(0,0,0,.18);
+      padding:9px 10px;border-radius:14px;
+    }
+    .goldLine{
+      height:1px;margin:16px 0;
+      background:linear-gradient(90deg, transparent, rgba(249,194,32,.6), transparent);
+    }
 
-  <a class="wa-btn" href="https://wa.me/601172412216" target="_blank" rel="noopener">
-    WhatsApp Now
-  </a>
+    .offerBox{
+      border-radius:18px;
+      border:1px solid rgba(249,194,32,.28);
+      background:linear-gradient(180deg, rgba(249,194,32,.10), rgba(132,29,9,.16));
+      padding:14px;
+    }
+    .offerTitle{
+      font-weight:900; letter-spacing:.5px;
+      color:var(--gold2);
+      margin:0 0 6px;
+      text-transform:uppercase;
+    }
+    .offerBig{
+      margin:0;
+      font-weight:1000;
+      font-size:42px;
+      background:linear-gradient(180deg, var(--gold2), var(--gold));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow:0 10px 30px rgba(249,194,32,.18);
+    }
+    .note{margin:8px 0 0;color:rgba(248,231,183,.78);font-size:13px}
 
-  <div class="wa-sub">Rock9.com • Fast support</div>
-</div>
+    .steps{
+      margin:0; padding-left:18px;
+      color:rgba(248,231,183,.78);
+    }
+    .steps li{margin:10px 0}
+    .small{
+      margin-top:12px;
+      font-size:12px;
+      color:rgba(248,231,183,.62);
+    }
+
+    .cta{
+      display:flex; flex-direction:column; gap:12px;
+      justify-content:space-between;
+    }
+
+    .whBtn{
+      display:flex; align-items:center; justify-content:center;
+      gap:10px;
+      text-decoration:none;
+      font-weight:1000;
+      padding:14px 14px;
+      border-radius:18px;
+      border:1px solid rgba(248,231,183,.30);
+      color:#2b1600;
+      background:
+        radial-gradient(120% 180% at 50% 0%, rgba(248,231,183,.85), rgba(249,194,32,.85) 40%, rgba(215,74,9,.35) 100%),
+        linear-gradient(180deg, var(--gold2), var(--gold));
+      box-shadow: 0 18px 40px rgba(249,194,32,.18), 0 18px 60px rgba(0,0,0,.45);
+      transform: translateY(0);
+      transition: transform .15s ease, filter .15s ease;
+    }
+    .whBtn:active{transform: translateY(1px); filter: brightness(.98);}
+    .whIcon{
+      width:22px;height:22px; display:inline-block;
+      border-radius:6px;
+      background: rgba(0,0,0,.18);
+      border:1px solid rgba(0,0,0,.18);
+      position:relative;
+    }
+    .whIcon::before{
+      content:"";
+      position:absolute; inset:4px 5px 5px 4px;
+      border-radius:50%;
+      border:2px solid rgba(0,0,0,.55);
+      clip-path: polygon(0% 0%,100% 0%,100% 78%,56% 78%,45% 100%,38% 78%,0% 78%);
+      opacity:.55;
+    }
+
+    .sticky{
+      position:fixed; left:0; right:0; bottom:0;
+      padding:10px 12px;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,.55));
+      backdrop-filter: blur(6px);
+      border-top:1px solid rgba(248,231,183,.10);
+    }
+    .stickyInner{max-width:980px;margin:0 auto;}
+    .sticky .whBtn{border-radius:16px;padding:14px}
+
+    @media (max-width: 860px){
+      .hero{grid-template-columns:1fr;}
+      h1{font-size:32px}
+      .wrap{padding-bottom:120px}
+    }
+  </style>
+</head>
+
+<body class="sparkle">
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">Rock9.com</div>
+      <div class="pill">Official WhatsApp Support</div>
+    </div>
+
+    <div class="hero">
+      <section class="card">
+        <h1>Exclusive Welcome Bonus</h1>
+        <p class="sub">Fast verification • Quick guide • One-to-one support on WhatsApp.</p>
+
+        <div class="offerBox">
+          <div class="offerTitle">Today’s Offer</div>
+          <p class="offerBig">99% BONUS</p>
+          <p class="note">Tap WhatsApp to claim — our team will reply ASAP.</p>
+        </div>
+
+        <div class="goldLine"></div>
+
+        <div class="badgeRow">
+          <div class="badge">✅ Quick & Simple Steps</div>
+          <div class="badge">✅ Secure Support Chat</div>
+          <div class="badge">✅ Mobile-Friendly</div>
+        </div>
+
+        <p class="small">
+          If WhatsApp doesn’t open, please update WhatsApp or try using mobile data.
+        </p>
+      </section>
+
+      <aside class="card cta">
+        <div>
+          <h2 style="margin:0 0 8px; font-size:18px; letter-spacing:.3px;">How it works</h2>
+          <ol class="steps">
+            <li>Tap the WhatsApp button</li>
+            <li>Send the auto message</li>
+            <li>Follow our guide to claim your bonus</li>
+          </ol>
+        </div>
+
+        <!-- Desktop button -->
+        <a id="waBtnTop" class="whBtn" href="#" target="_blank" rel="noopener">
+          <span class="whIcon" aria-hidden="true"></span>
+          WhatsApp Now (Claim Bonus)
+        </a>
+
+        <div class="small">
+          By contacting us, you agree to receive messages related to your request.
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Mobile sticky button -->
+  <div class="sticky">
+    <div class="stickyInner">
+      <a id="waBtnSticky" class="whBtn" href="#" target="_blank" rel="noopener">
+        <span class="whIcon" aria-hidden="true"></span>
+        WhatsApp Now (Claim Bonus)
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // ✅ CHANGE THIS:
+    const WA_NUMBER = "60123456789"; // no + sign (example: Malaysia 60..., SG 65..., AU 61...)
+
+    // Auto message + carry UTM params into the message for tracking
+    const params = new URLSearchParams(window.location.search);
+    const utm_source = params.get("utm_source") || "facebook";
+    const utm_campaign = params.get("utm_campaign") || "rock9";
+    const utm_adset = params.get("utm_adset") || "";
+    const utm_ad = params.get("utm_content") || "";
+
+    const msg =
+`Hi Rock9.com, I want to claim the welcome bonus.
+Source: ${utm_source}
+Campaign: ${utm_campaign}
+Adset: ${utm_adset}
+Ad: ${utm_ad}`;
+
+    const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+
+    document.getElementById("waBtnTop").href = waLink;
+    document.getElementById("waBtnSticky").href = waLink;
+  </script>
+</body>
+</html>
