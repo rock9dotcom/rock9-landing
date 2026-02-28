@@ -14,6 +14,7 @@
 }
 
 *{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;}
+
 body{
   margin:0;
   color:var(--gold2);
@@ -51,39 +52,39 @@ body{
 .wrap{
   max-width:900px;
   margin:auto;
-  padding:30px 16px 120px;
+  padding:60px 16px 60px;
   position:relative;
   z-index:2;
   text-align:center;
 }
 
 .brand{
-  font-size:20px;
+  font-size:22px;
   font-weight:900;
   background:linear-gradient(180deg,var(--gold2),var(--gold));
   -webkit-background-clip:text;
   color:transparent;
-  margin-bottom:20px;
+  margin-bottom:30px;
 }
 
 .card{
   background:rgba(0,0,0,.25);
   border:1px solid rgba(248,231,183,.25);
-  border-radius:20px;
-  padding:25px;
-  box-shadow:0 20px 50px rgba(0,0,0,.5);
+  border-radius:22px;
+  padding:40px 25px;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
 }
 
 h1{
   margin:0 0 15px;
-  font-size:34px;
+  font-size:36px;
   text-transform:uppercase;
 }
 
 .bonus{
-  font-size:46px;
+  font-size:52px;
   font-weight:900;
-  margin:10px 0;
+  margin:15px 0;
   background:linear-gradient(180deg,var(--gold2),var(--gold));
   -webkit-background-clip:text;
   color:transparent;
@@ -91,7 +92,8 @@ h1{
 
 .sub{
   color:rgba(248,231,183,.85);
-  margin-bottom:25px;
+  margin-bottom:30px;
+  font-size:16px;
 }
 
 /* ===== BUTTON ===== */
@@ -101,36 +103,25 @@ h1{
   justify-content:center;
   text-decoration:none;
   font-weight:900;
-  padding:16px 24px;
-  border-radius:18px;
+  padding:18px 28px;
+  border-radius:20px;
   border:1px solid rgba(248,231,183,.4);
   color:#2b1600;
+  font-size:16px;
   background:
     radial-gradient(120% 180% at 50% 0%, rgba(248,231,183,.9), rgba(249,194,32,.9) 40%, rgba(215,74,9,.3) 100%);
-  box-shadow:0 20px 40px rgba(249,194,32,.25);
+  box-shadow:0 20px 50px rgba(249,194,32,.35);
   transition:all .2s ease;
 }
 .whBtn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 25px 60px rgba(249,194,32,.4);
+  transform:translateY(-3px);
+  box-shadow:0 30px 70px rgba(249,194,32,.45);
 }
 
 .small{
   font-size:12px;
-  margin-top:15px;
+  margin-top:20px;
   opacity:.7;
-}
-
-/* ===== STICKY BUTTON ===== */
-.sticky{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  padding:10px;
-  background:linear-gradient(180deg, transparent, rgba(0,0,0,.7));
-  text-align:center;
-  z-index:3;
 }
 </style>
 </head>
@@ -146,7 +137,9 @@ h1{
   <div class="card">
     <h1>Exclusive Welcome Bonus</h1>
     <div class="bonus">99% BONUS</div>
-    <div class="sub">Tap WhatsApp now to claim your welcome reward instantly.</div>
+    <div class="sub">
+      Tap WhatsApp now to claim your welcome reward instantly.
+    </div>
 
     <a id="waBtnTop" class="whBtn" href="#" target="_blank">
       WhatsApp Now (Claim Bonus)
@@ -158,24 +151,15 @@ h1{
   </div>
 </div>
 
-<!-- Sticky Button -->
-<div class="sticky">
-  <a id="waBtnSticky" class="whBtn" href="#" target="_blank">
-    WhatsApp Now
-  </a>
-</div>
-
 <script>
 // ===== CHANGE THIS NUMBER (no + sign) =====
-const WA_NUMBER = "61402342254";
+const WA_NUMBER = "60123456789";
 
 // Clean auto message (no tracking info)
 const msg = "Hi Rock9.com, I want to claim the 99% Welcome Bonus.";
 
 const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-
 document.getElementById("waBtnTop").href = waLink;
-document.getElementById("waBtnSticky").href = waLink;
 
 // ===== COIN RAIN GENERATOR =====
 const rainContainer = document.getElementById("coinRain");
@@ -194,7 +178,7 @@ function createCoin() {
   setTimeout(() => coin.remove(), 7000);
 }
 
-// Adjust speed (lower number = more coins)
+// Adjust density (lower = more coins)
 setInterval(createCoin, 180);
 </script>
 
