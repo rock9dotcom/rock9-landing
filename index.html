@@ -295,15 +295,18 @@
     const WA_NUMBER = "61402342254";
 
     // Auto message + include UTM for tracking from Facebook ads
-    const params = new URLSearchParams(window.location.search);
-    const utm_source = params.get("utm_source") || "facebook";
-    const utm_campaign = params.get("utm_campaign") || "rock9";
-    const utm_adset = params.get("utm_adset") || "";
-    const utm_ad = params.get("utm_content") || "";
+const params = new URLSearchParams(window.location.search);
+const utm_source = params.get("utm_source") || "facebook";
+const utm_campaign = params.get("utm_campaign") || "rock9";
+const utm_adset = params.get("utm_adset") || "";
+const utm_ad = params.get("utm_content") || "";
 
-    const msg =
-`Hi ROCK9.com, I want to claim the 99% welcome bonus.
-;
+const msg =
+`Hi Rock9.com, I want to claim the welcome bonus.
+Source: ${utm_source}
+Campaign: ${utm_campaign}
+Adset: ${utm_adset}
+Ad: ${utm_ad}`;
 
     const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
     document.getElementById("waBtnTop").href = waLink;
